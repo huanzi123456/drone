@@ -6,11 +6,11 @@ steps:
     image: drillster/drone-volume-cache
     settings:
       restore: true
-      mount:
-        - ./repository
-    volumes:
-      - name: cache
-        path: /cache
+#      mount:
+#        - ./repository
+#    volumes:
+#      - name: cache
+#        path: /cache
     when:
       event:
         - push
@@ -19,9 +19,9 @@ steps:
 #构建 打包 部署
   - name:  Build & Deploy & Pushed
     image: maven:3.6.3-jdk-8
-    volumes:
-      - name: cache
-        path: /root/.m2
+#    volumes:
+#      - name: cache
+#        path: /root/.m2
     commands:
       - mvn clean package deploy -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build -P IDE
     when:
@@ -33,11 +33,11 @@ steps:
     image: drillster/drone-volume-cache
     settings:
       rebuild: true
-      mount:
-        - ./repository
-    volumes:
-      - name: cache
-        path: /cache
+#      mount:
+#        - ./repository
+#    volumes:
+#      - name: cache
+#        path: /cache
     when:
       event:
         - push
@@ -53,7 +53,7 @@ steps:
 #    when:
 #      status: [failure, success]
 
-volumes:
-  - name: cache
-    host:
-      path: /mnt/data/maven/repo
+#volumes:
+#  - name: cache
+#    host:
+#      path: /mnt/data/maven/repo
