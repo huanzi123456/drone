@@ -9,9 +9,9 @@ steps:
       restore: true
       mount:
         - ./repository
-#    volumes:
-#      - name: cache
-#        path: /cache
+    volumes:
+      - name: cache
+        path: /cache
     when:
       event:
         - push
@@ -21,11 +21,11 @@ steps:
   - name:  Build & Deploy & Pushed
     image: maven:3.6.3-jdk-8
     volumes:
-      - /var/run/docker.sock : /var/run/docker.sock
-      - /home/docker/maven/m2 : /root/.m2
+      - name: cache
+        path: /root/.m2
     commands:
 #      - mvn clean package deploy -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build
-      - mvn clean package -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build
+      - mvn clean package -DskipTests=true -Dmaven.repo.local=./repository
     when:
       branch: develop
       event:
@@ -35,11 +35,11 @@ steps:
     image: drillster/drone-volume-cache
     settings:
       rebuild: true
-#      mount:
-#        - ./repository
-#    volumes:
-#      - name: cache
-#        path: /cache
+      mount:
+        - ./repository
+    volumes:
+      - name: cache
+        path: /cache
     when:
       event:
         - push
@@ -56,7 +56,7 @@ steps:
 #    when:
 #      status: [failure, success]
 
-#volumes:
-#  - name: cache
-#    host:
-#      path: /mnt/data/maven/repo
+volumes:
+  - name: cache
+    host:
+      path: /mnt/data/maven/repo
