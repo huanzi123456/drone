@@ -9,9 +9,9 @@ steps:
       restore: true
       mount:
         - ./repository
-    volumes:
-      - name: cache
-        path: /cache
+#    volumes:
+#      - name: cache
+#        path: /cache
     when:
       event:
         - push
@@ -34,11 +34,11 @@ steps:
     image: drillster/drone-volume-cache
     settings:
       rebuild: true
-      mount:
-        - ./repository
-    volumes:
-      - name: cache
-        path: /cache
+#      mount:
+#        - ./repository
+#    volumes:
+#      - name: cache
+#        path: /cache
     when:
       event:
         - push
@@ -54,7 +54,7 @@ steps:
 #    when:
 #      status: [failure, success]
 
-volumes:
-  - name: cache
-    host:
-      path: /mnt/data/maven/repo
+#volumes:
+#  - name: cache
+#    host:
+#      path: /mnt/data/maven/repo
