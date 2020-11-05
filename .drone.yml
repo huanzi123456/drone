@@ -42,6 +42,7 @@ steps:
     when:
       event:
         - push
+
 #钉钉通知
 #  - name: Dingtalk Notification
 #    image: guoxudongdocker/drone-dingtalk
