@@ -24,7 +24,8 @@ steps:
       - /var/run/docker.sock : /var/run/docker.sock
       - /home/docker/maven/m2 : /root/.m2
     commands:
-      - mvn clean package deploy -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build
+#      - mvn clean package deploy -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build
+      - mvn clean package -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build
     when:
       branch: develop
       event:
