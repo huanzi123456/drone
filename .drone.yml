@@ -24,7 +24,7 @@ steps:
       - name: cache
         path: /root/.m2
     commands:
-      - mvn clean package deploy -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build -P IDE
+      - mvn clean package deploy -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build
     when:
       branch: develop
       event:
