@@ -55,7 +55,7 @@ steps:
 #    when:
 #      status: [failure, success]
 
-#volumes:
-#  - name: cache
-#    host:
-#      path: /mnt/data/maven/repo
+volumes:
+  - name: cache
+    host:
+      path: /mnt/data/maven/repo
