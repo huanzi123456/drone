@@ -1,0 +1,60 @@
+kind: pipeline
+name: test
+
+steps:
+#
+  - name: Restore Cache
+    image: drillster/drone-volume-cache
+    settings:
+      restore: true
+      mount:
+        - ./repository
+    volumes:
+      - name: cache
+        path: /cache
+    when:
+      event:
+        - push
+
+
+#构建 打包 部署
+  - name:  Build & Deploy & Pushed
+    image: maven:3.6.3-jdk-8
+    volumes:
+      - name: cache
+        path: /root/.m2
+    commands:
+      - mvn clean package deploy -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build -P IDE
+    when:
+      branch: develop
+      event:
+        - push
+#重建缓存
+  - name: Rebuild Cache
+    image: drillster/drone-volume-cache
+    settings:
+      rebuild: true
+      mount:
+        - ./repository
+    volumes:
+      - name: cache
+        path: /cache
+    when:
+      event:
+        - push
+#钉钉通知
+#  - name: Dingtalk Notification
+#    image: guoxudongdocker/drone-dingtalk
+#    settings:
+#      token: 38f4f9b30bfd7a8dc57e1abfb6c1412917869c44e3b791369d8646c5a19f76d4
+#      type: markdown
+#      message_color: true
+#      message_pic: true
+#      sha_link: true
+#    when:
+#      status: [failure, success]
+
+volumes:
+  - name: cache
+    host:
+      path: /mnt/data/maven/repo
