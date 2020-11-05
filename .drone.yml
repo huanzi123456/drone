@@ -21,8 +21,8 @@ steps:
   - name:  Build & Deploy & Pushed
     image: maven:3.6.3-jdk-8
     volumes:
-      - name: cache
-        path: /root/.m2
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/docker/maven/m2:/root/.m2
     commands:
       - mvn clean package deploy -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build
     when:
@@ -55,7 +55,9 @@ steps:
 #    when:
 #      status: [failure, success]
 
-volumes:
-  - name: cache
-    host:
-      path: /mnt/data/maven/repo
+
+
+#volumes:
+#  - name: cache
+#    host:
+#      path: /mnt/data/maven/repo
