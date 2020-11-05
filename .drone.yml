@@ -1,5 +1,5 @@
 kind: pipeline
-name: test
+name: default
 
 steps:
   - name: Restore Cache
