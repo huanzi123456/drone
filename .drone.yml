@@ -16,7 +16,6 @@ steps:
       event:
         - push
 
-
 #构建 打包 部署
   - name:  Build & Deploy & Pushed
     image: maven:3.6.3-jdk-8
