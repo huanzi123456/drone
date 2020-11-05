@@ -7,8 +7,8 @@ steps:
     image: drillster/drone-volume-cache
     settings:
       restore: true
-#      mount:
-#        - ./repository
+      mount:
+        - ./repository
     volumes:
       - name: cache
         path: /cache
@@ -34,8 +34,8 @@ steps:
     image: drillster/drone-volume-cache
     settings:
       rebuild: true
-#      mount:
-#        - ./repository
+      mount:
+        - ./repository
     volumes:
       - name: cache
         path: /cache
