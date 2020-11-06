@@ -23,8 +23,8 @@ steps:
         path: /root/.m2
 #deploy 传到私服
     commands:
-      - mvn clean package  -DskipTests=true -Dmaven.repo.local=./repository -X
-#      - mvn clean package  -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build  -X
+#      - mvn clean package  -DskipTests=true -Dmaven.repo.local=./repository -X
+      - mvn clean package  -DskipTests=true -Dmaven.repo.local=./repository com.google.cloud.tools:jib-maven-plugin:2.2.0:build  -X
 #      - mvn clean package -DskipTests=true -Dmaven.repo.local=./repository
     when:
       branch: develop

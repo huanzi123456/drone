@@ -52,7 +52,7 @@
                     </from>
                     <to>
                         <!--镜像名称和tag，使用了mvn内置变量${project.version}，表示当前工程的version-->
-                        <image>106.55.159.119:80/harbor/${project.name}</image>
+                        <image>106.55.159.119:80/harbor/${project.name}456</image>
 <!--                        <image>registry.cn-hangzhou.aliyuncs.com/cheh/maven</image>-->
                         <tags>
                             <tag>latest</tag>
